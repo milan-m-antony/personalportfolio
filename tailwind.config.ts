@@ -9,6 +9,12 @@ export default {
   ],
   theme: {
   	extend: {
+        animationDelay: { // Add this section
+          '1000': '1000ms',
+          '2000': '2000ms',
+          '3000': '3000ms',
+          '4000': '4000ms',
+        },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -90,5 +96,17 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ matchUtilities, theme }: { matchUtilities: any, theme: any }) { // Add this function
+      matchUtilities(
+        {
+          'animation-delay': (value: string) => ({
+            'animation-delay': value,
+          }),
+        },
+        { values: theme('animationDelay') }
+      )
+    },
+  ],
 } satisfies Config;
