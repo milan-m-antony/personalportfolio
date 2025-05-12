@@ -1,15 +1,16 @@
 import type {Metadata} from 'next';
-import { Inter } from 'next/font/google'; // Changed from GeistSans
+import { Inter } from 'next/font/google';
 import './globals.css';
 import {ThemeProvider} from '@/components/theme-provider';
 import {Toaster} from '@/components/ui/toaster';
 import Header from '@/components/layout/header';
+import Footer from '@/components/layout/footer'; // Import Footer
 import CustomCursor from '@/components/custom-cursor';
 import { cn } from '@/lib/utils';
 
 // Initialize Inter font
 const inter = Inter({
-  variable: '--font-inter', // Updated variable name
+  variable: '--font-inter',
   subsets: ['latin'],
 });
 
@@ -28,7 +29,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          inter.variable, // Use the updated font variable
+          inter.variable,
           "antialiased min-h-screen flex flex-col"
         )}
       >
@@ -43,7 +44,7 @@ export default function RootLayout({
           <main className="flex-grow container mx-auto px-4 py-8 pt-24"> {/* Add padding top to avoid overlap with sticky header */}
             {children}
           </main>
-          {/* <Footer /> Optionally add a footer */}
+          <Footer /> {/* Add Footer component */}
           <Toaster />
         </ThemeProvider>
       </body>
