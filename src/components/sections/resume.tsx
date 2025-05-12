@@ -87,7 +87,7 @@ const Resume = () => {
          transition={{ duration: 0.6 }}
        >
         <Card className={cn("w-full max-w-4xl mx-auto overflow-hidden glassmorphism")}>
-          <CardHeader className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6">
+          <CardHeader className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 pb-4"> {/* Adjusted padding */}
             <div>
                 <CardTitle className="text-2xl font-bold text-primary dark:text-primary-foreground">{resumeData.name}</CardTitle>
                 <CardDescription className="text-accent">{resumeData.title}</CardDescription>
@@ -99,19 +99,19 @@ const Resume = () => {
               </Link>
             </Button>
           </CardHeader>
-          <CardContent className="p-6 pt-0">
+          <CardContent className="p-6 pt-4"> {/* Adjusted padding */}
             <Tabs defaultValue="experience" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-6 bg-muted/50 dark:bg-muted/20 p-1 rounded-lg">
-                <TabsTrigger value="experience" className="data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><Briefcase className="inline-block w-4 h-4 mr-1" />Experience</TabsTrigger>
-                <TabsTrigger value="education" className="data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><GraduationCap className="inline-block w-4 h-4 mr-1" />Education</TabsTrigger>
-                 <TabsTrigger value="skills" className="data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><Star className="inline-block w-4 h-4 mr-1" />Key Skills</TabsTrigger>
-                 <TabsTrigger value="languages" className="data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><Languages className="inline-block w-4 h-4 mr-1" />Languages</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8 bg-muted/50 dark:bg-muted/20 p-1 rounded-lg gap-1"> {/* Increased mb and added gap */}
+                <TabsTrigger value="experience" className="data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><Briefcase className="inline-block w-4 h-4 mr-1.5" />Experience</TabsTrigger> {/* Increased mr */}
+                <TabsTrigger value="education" className="data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><GraduationCap className="inline-block w-4 h-4 mr-1.5" />Education</TabsTrigger> {/* Increased mr */}
+                 <TabsTrigger value="skills" className="data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><Star className="inline-block w-4 h-4 mr-1.5" />Key Skills</TabsTrigger> {/* Increased mr */}
+                 <TabsTrigger value="languages" className="data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><Languages className="inline-block w-4 h-4 mr-1.5" />Languages</TabsTrigger> {/* Increased mr */}
               </TabsList>
 
               {/* Experience Tab */}
               <TabsContent value="experience">
                 {resumeData.experience.length > 0 ? (
-                    <div className="space-y-6">
+                    <div className="space-y-8"> {/* Increased spacing between items */}
                     {resumeData.experience.map((exp, index) => (
                         <motion.div
                         key={index}
@@ -120,12 +120,12 @@ const Resume = () => {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.5 }}
                         custom={index}
-                        className="border-l-2 border-accent pl-4"
+                        className="border-l-2 border-accent pl-6 space-y-1" // Increased padding left, added space-y for inner spacing
                         >
-                        <h3 className="text-lg font-semibold text-foreground">{exp.role}</h3>
+                        <h3 className="text-lg font-semibold text-foreground leading-snug">{exp.role}</h3>
                         <p className="text-sm font-medium text-accent">{exp.company} | {exp.years}</p>
                         {exp.responsibilities && exp.responsibilities.length > 0 && (
-                            <ul className="list-disc list-outside pl-5 mt-2 space-y-1 text-sm text-foreground/80 dark:text-foreground/70">
+                            <ul className="list-disc list-outside pl-5 pt-1 space-y-1.5 text-sm text-foreground/80 dark:text-foreground/70"> {/* Increased space-y */}
                                 {exp.responsibilities.map((resp, i) => (
                                 <li key={i}>{resp}</li>
                                 ))}
@@ -135,13 +135,13 @@ const Resume = () => {
                     ))}
                     </div>
                 ) : (
-                    <p className="text-center text-muted-foreground italic">No professional experience listed yet.</p>
+                    <p className="text-center text-muted-foreground italic py-4">No professional experience listed yet.</p>
                 )}
               </TabsContent>
 
               {/* Education Tab */}
               <TabsContent value="education">
-                <div className="space-y-6">
+                 <div className="space-y-8"> {/* Increased spacing between items */}
                   {resumeData.education.map((edu, index) => (
                      <motion.div
                         key={index}
@@ -150,9 +150,9 @@ const Resume = () => {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.5 }}
                         custom={index}
-                        className="border-l-2 border-accent pl-4"
+                        className="border-l-2 border-accent pl-6 space-y-1" // Increased padding left, added space-y for inner spacing
                       >
-                      <h3 className="text-lg font-semibold text-foreground">{edu.degree}</h3>
+                      <h3 className="text-lg font-semibold text-foreground leading-snug">{edu.degree}</h3>
                       <p className="text-sm font-medium text-accent">{edu.institution} | {edu.years}</p>
                        {edu.details && <p className="mt-1 text-sm text-foreground/80 dark:text-foreground/70">{edu.details}</p>}
                     </motion.div>
@@ -162,7 +162,7 @@ const Resume = () => {
 
                {/* Skills Tab */}
                 <TabsContent value="skills">
-                  <div className="space-y-4">
+                   <div className="space-y-6"> {/* Increased spacing */}
                     {resumeData.keySkills.map((skillCat, index) => (
                       <motion.div
                         key={skillCat.name}
@@ -172,8 +172,8 @@ const Resume = () => {
                         viewport={{ once: true, amount: 0.5 }}
                         custom={index}
                       >
-                        <h4 className="text-md font-semibold text-accent mb-1">{skillCat.name}</h4>
-                        <p className="text-sm text-foreground/80 dark:text-foreground/70">{skillCat.skills}</p>
+                         <h4 className="text-md font-semibold text-accent mb-2">{skillCat.name}</h4> {/* Increased mb */}
+                         <p className="text-sm text-foreground/80 dark:text-foreground/70 leading-relaxed">{skillCat.skills}</p> {/* Added leading-relaxed */}
                       </motion.div>
                     ))}
                   </div>
@@ -181,7 +181,7 @@ const Resume = () => {
 
                  {/* Languages Tab */}
                 <TabsContent value="languages">
-                  <div className="space-y-4">
+                   <div className="space-y-5"> {/* Increased spacing */}
                     {resumeData.languages.map((lang, index) => (
                       <motion.div
                         key={lang.name}
@@ -190,9 +190,9 @@ const Resume = () => {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.5 }}
                         custom={index}
-                        className="flex justify-between items-center"
+                        className="flex justify-between items-center border-b border-border/50 pb-3" // Added border and padding bottom
                       >
-                        <span className="text-md font-semibold text-foreground">{lang.name}</span>
+                        <span className="text-md font-medium text-foreground">{lang.name}</span> {/* Changed font-semibold to medium */}
                         <span className="text-sm text-muted-foreground">{lang.proficiency}</span>
                       </motion.div>
                     ))}
