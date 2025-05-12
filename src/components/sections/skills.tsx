@@ -1,34 +1,51 @@
 "use client";
 
-import { motion, animate } from 'framer-motion'; // Import animate directly
+import { motion, animate } from 'framer-motion';
 import { Progress } from "@/components/ui/progress";
 import SectionWrapper from '@/components/section-wrapper';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { BrainCircuit, Code, Database, Server, Palette, Github } from 'lucide-react';
+import { BrainCircuit, Code, Database, Server, Palette, Settings, Cloud, ShieldCheck, HardDrive } from 'lucide-react'; // Added more icons
 import React from 'react';
 
+// Estimate levels based on description (BCA grad, recent certs)
 const skillsData = [
-  { name: "HTML5", level: 95, category: "Frontend", icon: Code },
-  { name: "CSS3 & Tailwind", level: 90, category: "Frontend", icon: Palette },
-  { name: "JavaScript (ES6+)", level: 85, category: "Frontend", icon: Code },
-  { name: "React & Next.js", level: 88, category: "Frontend", icon: Code },
-  { name: "TypeScript", level: 80, category: "Frontend", icon: Code },
-  { name: "Node.js & Express", level: 75, category: "Backend", icon: Server },
-  { name: "Python & Flask/Django", level: 70, category: "Backend", icon: Server },
-  { name: "SQL (PostgreSQL)", level: 70, category: "Databases", icon: Database },
-  { name: "MongoDB", level: 65, category: "Databases", icon: Database },
-  { name: "Git & GitHub", level: 90, category: "Tools", icon: Github },
-  { name: "Docker", level: 60, category: "Tools", icon: Server }, // Placeholder icon
-  { name: "Figma", level: 70, category: "Design", icon: Palette},
+  // Networking (High focus due to Diploma/CCNA)
+  { name: "Routing & Switching", level: 85, category: "Networking", icon: Server },
+  { name: "DHCP, NAT, VLAN, VPN", level: 80, category: "Networking", icon: Settings },
+  { name: "ACL, VTP, SNMP", level: 75, category: "Networking", icon: ShieldCheck },
+  { name: "Network Fundamentals", level: 90, category: "Networking", icon: Server },
+
+  // Cloud (High focus due to Azure cert)
+  { name: "Microsoft Azure", level: 85, category: "Cloud", icon: Cloud },
+  { name: "Azure Virtual Machines", level: 80, category: "Cloud", icon: Cloud },
+  { name: "Azure Storage Accounts", level: 75, category: "Cloud", icon: Database },
+  { name: "Azure Entra ID (AD)", level: 75, category: "Cloud", icon: Cloud },
+
+  // Windows Server/Tools (Medium focus due to MCSE)
+  { name: "Active Directory (ADDS)", level: 70, category: "Server & Tools", icon: Server },
+  { name: "IIS, DHCP Server", level: 65, category: "Server & Tools", icon: Server },
+  { name: "Hyper-V", level: 60, category: "Server & Tools", icon: Server },
+  { name: "Server Backup", level: 60, category: "Server & Tools", icon: HardDrive },
+
+  // Windows Client (Supporting skill)
+  { name: "OS Installation", level: 80, category: "Client OS", icon: HardDrive },
+  { name: "BitLocker, Defender", level: 70, category: "Client OS", icon: ShieldCheck },
+  { name: "KMSPico (Activation)", level: 60, category: "Client OS", icon: Settings }, // Note: KMSPico is often associated with unlicensed software. List carefully.
+
+  // Web Development (From Bootcamp)
+  { name: "HTML & CSS", level: 65, category: "Web Development", icon: Code },
+  { name: "JavaScript Basics", level: 60, category: "Web Development", icon: Code },
+
 ];
 
+// Define categories based on the skills provided
 const categories = [
-    { name: "Frontend", icon: Code },
-    { name: "Backend", icon: Server },
-    { name: "Databases", icon: Database },
-    { name: "Tools", icon: BrainCircuit }, // Example, adjust as needed
-    { name: "Design", icon: Palette }
+    { name: "Networking", icon: Server },
+    { name: "Cloud", icon: Cloud },
+    { name: "Server & Tools", icon: Settings },
+    { name: "Client OS", icon: HardDrive },
+    { name: "Web Development", icon: Code },
 ];
 
 const Skills = () => {
@@ -44,29 +61,32 @@ const Skills = () => {
   return (
     <SectionWrapper id="skills" title="Skills & Expertise" ref={sectionRef}>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {categories.map((category) => (
-          <motion.div
-            key={category.name}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card className={cn("h-full overflow-hidden glassmorphism")}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-lg font-semibold text-primary dark:text-primary-foreground">{category.name}</CardTitle>
-                 <category.icon className="h-6 w-6 text-accent" />
-              </CardHeader>
-              <CardContent className="space-y-4 pt-4">
-                {skillsData
-                  .filter((skill) => skill.category === category.name)
-                  .map((skill, index) => (
-                    <SkillItem key={skill.name} skill={skill} index={index} />
-                  ))}
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
+        {categories.map((category) => {
+           const categorySkills = skillsData.filter((skill) => skill.category === category.name);
+           if (categorySkills.length === 0) return null; // Don't render empty categories
+
+           return (
+              <motion.div
+                key={category.name}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Card className={cn("h-full overflow-hidden glassmorphism")}>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-lg font-semibold text-primary dark:text-primary-foreground">{category.name}</CardTitle>
+                    <category.icon className="h-6 w-6 text-accent" />
+                  </CardHeader>
+                  <CardContent className="space-y-4 pt-4">
+                    {categorySkills.map((skill, index) => (
+                        <SkillItem key={skill.name} skill={skill} index={index} />
+                      ))}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )
+        })}
       </div>
     </SectionWrapper>
   );
@@ -80,26 +100,33 @@ interface SkillItemProps {
 
 const SkillItem: React.FC<SkillItemProps> = ({ skill, index }) => {
     const [animatedLevel, setAnimatedLevel] = React.useState(0);
+    const progressRef = React.useRef<HTMLDivElement>(null); // Ref for the progress bar container
 
     return (
         <motion.div
+          ref={progressRef} // Attach ref here
           key={skill.name}
           className="space-y-1"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           // Use viewport settings from parent or define specific ones
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }} // Stagger within card + card delay
+          viewport={{ once: true, amount: 0.8 }} // Trigger when 80% visible
+          transition={{ duration: 0.5, delay: index * 0.05 + 0.2 }} // Faster stagger
            onViewportEnter={() => {
               // Animate the progress bar value when the item enters the viewport
               const controls = animate(0, skill.level, { // Use imported animate function
-                  duration: 1,
-                  delay: index * 0.1 + 0.4, // Delay slightly more for the bar animation
+                  duration: 0.8, // Slightly faster animation
+                  delay: 0.1, // Minimal delay after entering viewport
                   ease: "easeOut",
-                  onUpdate: (value) => setAnimatedLevel(Math.round(value)),
+                  onUpdate: (value) => {
+                    // Check if the component is still mounted before updating state
+                     if (progressRef.current) {
+                         setAnimatedLevel(Math.round(value));
+                     }
+                  },
               });
-              // Return cleanup function if needed, though whileInView handles this
-              // return () => controls.stop();
+              // Return cleanup function
+              return () => controls.stop();
            }}
         >
           <div className="flex justify-between items-center mb-1">

@@ -3,46 +3,86 @@
 import SectionWrapper from '@/components/section-wrapper';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, Rocket, Flag } from 'lucide-react'; // Example icons
+import { Briefcase, GraduationCap, Rocket, Flag, Construction } from 'lucide-react'; // Added Construction icon
 import React from 'react';
 
+// Build timeline data from user's info, ordering chronologically (most recent first)
 const timelineData = [
+   {
+    date: "Dec 2024",
+    title: "Expected Certifications (CCNA, MCSE, Azure Admin)",
+    description: "Completing intensive training and certification exams at SMEC.",
+    icon: GraduationCap,
+    iconBg: "bg-green-500",
+  },
   {
-    date: "Present",
-    title: "Frontend Developer @ Tech Solutions Inc.",
-    description: "Continuing to build innovative features, mentor junior developers, and lead frontend initiatives.",
+    date: "June–Dec 2024",
+    title: "Network Engineering Diploma & Training",
+    description: "Enrolled in Diploma program and Network Support Engineer training at SMEC LABS, Kochi.",
     icon: Briefcase,
     iconBg: "bg-blue-500",
   },
    {
-    date: "2023",
-    title: "Launched Project Alpha",
-    description: "Successfully developed and launched a major web application, receiving positive user feedback.",
-    icon: Rocket,
-    iconBg: "bg-purple-500",
+    date: "2024",
+    title: "Graduated BCA",
+    description: "Completed Bachelor of Computer Applications from B.V.M. Holy Cross College.",
+    icon: GraduationCap,
+    iconBg: "bg-green-500",
   },
   {
-    date: "2022",
-    title: "Graduated University",
-    description: "Completed B.S. in Computer Science with Magna Cum Laude honors.",
+    date: "Ongoing", // Representing continuous project work
+    title: "Personal Projects Development",
+    description: "Working on projects like Online Diagnostic Lab, Cloud Management, and this portfolio.",
+    icon: Construction, // Icon for ongoing work/building
+    iconBg: "bg-purple-500",
+  },
+   {
+    date: "2021–2024",
+    title: "BCA Studies",
+    description: "Studied Computer Applications at B.V.M. Holy Cross College, Cherpunkal.",
+    icon: GraduationCap,
+    iconBg: "bg-green-500",
+  },
+  {
+    date: "2019–2021",
+    title: "Higher Secondary Education",
+    description: "Completed Higher Secondary (Computer Science) at St. Thomas HSS, Erumely.",
+    icon: GraduationCap,
+    iconBg: "bg-green-500",
+  },
+  {
+    date: "2018–2019",
+    title: "High School Education",
+    description: "Completed High School at St. Mary’s HS, Umikuppa.",
     icon: GraduationCap,
     iconBg: "bg-green-500",
   },
    {
-    date: "2021",
-    title: "Web Dev Internship",
-    description: "Gained practical experience at Web Creations Co., contributing to real-world projects.",
-    icon: Briefcase,
-    iconBg: "bg-blue-500",
+    date: "~2019/2020", // Approximate date for state exhibition
+    title: "State-Level Work Exhibition",
+    description: "Participated by designing a multi-purpose rescue vehicle concept.",
+    icon: Rocket, // Or Lightbulb
+    iconBg: "bg-yellow-500",
   },
-  {
-    date: "2018",
-    title: "Started University Journey",
-    description: "Began studies in Computer Science at the University of Example.",
+   {
+    date: "2021", // Start of BCA journey
+    title: "Started University Journey (BCA)",
+    description: "Began Bachelor's degree at B.V.M. Holy Cross College.",
     icon: Flag,
     iconBg: "bg-gray-500",
   },
-];
+].sort((a, b) => {
+  // Basic sort: 'Present' first, then years descending. Needs more robust date parsing for accuracy.
+  if (a.date === "Present") return -1;
+  if (b.date === "Present") return 1;
+  if (a.date === "Ongoing") return -1; // Show ongoing projects near the top
+  if (b.date === "Ongoing") return 1;
+
+  const yearA = parseInt(a.date.split('–')[0].match(/\d{4}/)?.[0] || '0');
+  const yearB = parseInt(b.date.split('–')[0].match(/\d{4}/)?.[0] || '0');
+  return yearB - yearA; // Sort descending by year
+});
+
 
 const Timeline = () => {
   const itemVariants = {
@@ -54,13 +94,21 @@ const Timeline = () => {
     },
   };
 
-  const lineVariants = {
+   const lineVariants = {
       hidden: { scaleY: 0 },
       visible: {
           scaleY: 1,
           transition: { duration: 0.8, ease: "easeOut", delay: 0.2 }
       }
   }
+
+
+  // Detect if window is defined (client-side)
+  const [isClient, setIsClient] = React.useState(false);
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+
 
   return (
     <SectionWrapper id="timeline" title="My Journey">
@@ -77,7 +125,8 @@ const Timeline = () => {
         <div className="space-y-12">
           {timelineData.map((item, index) => {
              const Icon = item.icon || Briefcase;
-             const isLeft = index % 2 === 0 && typeof window !== 'undefined' && window.innerWidth >= 768; // Alternate sides on larger screens
+              // Determine side based on index and screen size (only if client-side)
+             const isLeft = isClient && index % 2 === 0 && window.innerWidth >= 768;
 
              return (
                 <motion.div
@@ -90,6 +139,7 @@ const Timeline = () => {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
+                  transition={{ delay: index * 0.1 }} // Add stagger delay
                  >
                   {/* Icon */}
                   <div className={cn(

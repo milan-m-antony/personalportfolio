@@ -23,50 +23,42 @@ import { motion } from "framer-motion";
 
 const projectsData = [
   {
-    title: "Project Alpha",
-    description: "A revolutionary web application for task management.",
+    title: "Online Diagnostic Lab Management System",
+    description: "A web application for managing diagnostic lab operations. (Further details pending)",
     image: "https://picsum.photos/600/400?random=1",
-    tags: ["React", "Node.js", "MongoDB", "TailwindCSS"],
+    tags: ["Web App", "Management System"], // Placeholder tags
     liveUrl: "#",
     githubUrl: "#",
-    aiHint: "web app dashboard",
+    aiHint: "lab system online",
   },
   {
-    title: "Project Beta",
-    description: "E-commerce platform with seamless user experience.",
+    title: "Cloud Resource Management",
+    description: "A project focused on managing cloud resources efficiently. (Further details pending)",
     image: "https://picsum.photos/600/400?random=2",
-    tags: ["Next.js", "Stripe", "GraphQL", "PostgreSQL"],
+    tags: ["Cloud", "Management", "Azure"], // Placeholder tags
     liveUrl: "#",
     githubUrl: "#",
-    aiHint: "online store product",
+    aiHint: "cloud dashboard manage",
   },
   {
-    title: "Project Gamma",
-    description: "Interactive data visualization dashboard.",
+    title: "Teacher Duty Hour Allocation System",
+    description: "System designed to allocate duty hours for teachers. (Further details pending)",
     image: "https://picsum.photos/600/400?random=3",
-    tags: ["D3.js", "React", "Firebase", "Charts"],
+    tags: ["Allocation System", "Web App"], // Placeholder tags
     liveUrl: "#",
     githubUrl: "#",
-    aiHint: "data dashboard chart",
+    aiHint: "schedule system teacher",
   },
    {
-    title: "Project Delta",
-    description: "Mobile-first social networking app.",
+    title: "Personal Portfolio",
+    description: "This website, built to showcase my skills and projects.",
     image: "https://picsum.photos/600/400?random=4",
-    tags: ["React Native", "Expo", "Firebase", "Push Notifications"],
-    liveUrl: "#",
-    githubUrl: "#",
-    aiHint: "mobile app social",
+    tags: ["Next.js", "React", "TailwindCSS", "TypeScript", "Framer Motion"],
+    liveUrl: "#", // Current site URL ideally
+    githubUrl: "#", // Link to this repo if public
+    aiHint: "portfolio website modern",
   },
-   {
-    title: "Project Epsilon",
-    description: "AI-powered content generation tool.",
-    image: "https://picsum.photos/600/400?random=5",
-    tags: ["Python", "Flask", "OpenAI API", "React"],
-    liveUrl: "#",
-    githubUrl: "#",
-    aiHint: "ai tool interface",
-  },
+   // Add more projects here if needed
 ];
 
 const cardVariants = {
@@ -95,10 +87,10 @@ const Projects = () => {
         className="w-full"
         opts={{
           align: "start",
-          loop: true,
+          loop: projectsData.length > 3, // Only loop if enough items
         }}
         onMouseEnter={plugin.current.stop}
-        onMouseLeave={plugin.current.reset}
+        onMouseLeave={plugin.current.start} // Use start instead of reset for continuous play
       >
         <CarouselContent className="-ml-4">
           {projectsData.map((project, index) => (
@@ -150,13 +142,13 @@ const Projects = () => {
                         ))}
                       </div>
                     </CardContent>
-                     <CardFooter className="p-6 pt-0 flex justify-between items-center">
-                      <Button variant="link" asChild className="p-0 h-auto text-accent hover:underline">
+                     <CardFooter className="p-6 pt-0 flex justify-between items-center mt-auto"> {/* Ensure footer is at bottom */}
+                      <Button variant="link" asChild className="p-0 h-auto text-accent hover:underline" disabled={project.liveUrl === "#"}>
                         <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                           Live Demo <ExternalLink className="ml-1 h-4 w-4" />
                         </Link>
                       </Button>
-                      <Button variant="ghost" size="icon" asChild className="text-foreground/70 hover:text-foreground">
+                      <Button variant="ghost" size="icon" asChild className="text-foreground/70 hover:text-foreground" disabled={project.githubUrl === "#"}>
                          <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} GitHub Repository`}>
                            <Github className="h-5 w-5" />
                          </Link>
@@ -168,8 +160,12 @@ const Projects = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10 hidden sm:flex glassmorphism hover:bg-primary/80 text-primary-foreground" />
-        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10 hidden sm:flex glassmorphism hover:bg-primary/80 text-primary-foreground" />
+        {projectsData.length > 1 && ( // Only show controls if more than 1 item
+             <>
+                <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10 hidden sm:flex glassmorphism hover:bg-primary/80 text-primary-foreground" />
+                <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10 hidden sm:flex glassmorphism hover:bg-primary/80 text-primary-foreground" />
+             </>
+        )}
       </Carousel>
     </SectionWrapper>
   );

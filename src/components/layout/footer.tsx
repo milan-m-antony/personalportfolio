@@ -6,10 +6,10 @@ import { TermsDialog } from '@/components/terms-dialog'; // Import the TermsDial
 import { cn } from '@/lib/utils';
 
 const socialLinks = [
-  { name: 'GitHub', href: 'https://github.com/yourusername', icon: Github },
-  { name: 'LinkedIn', href: 'https://linkedin.com/in/yourusername', icon: Linkedin },
-  { name: 'Twitter', href: 'https://twitter.com/yourusername', icon: Twitter },
-  { name: 'Email', href: 'mailto:your.email@example.com', icon: Mail },
+  { name: 'GitHub', href: '#', icon: Github }, // Placeholder
+  { name: 'LinkedIn', href: 'https://linkedin.com/in/milanmantony', icon: Linkedin },
+  { name: 'Twitter', href: '#', icon: Twitter }, // Placeholder
+  { name: 'Email', href: 'mailto:milanmelemuri2002@gmail.com', icon: Mail },
 ];
 
 export default function Footer() {
@@ -29,7 +29,7 @@ export default function Footer() {
               className="text-foreground/70 hover:text-accent hover:bg-accent/10 transition-colors rounded-full"
               data-cursor-pointer
             >
-              <Link href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.name}>
+              <Link href={link.href} target={link.name !== 'Email' ? '_blank' : '_self'} rel="noopener noreferrer" aria-label={link.name}>
                 <link.icon className="h-5 w-5" />
               </Link>
             </Button>
@@ -37,7 +37,7 @@ export default function Footer() {
         </div>
         <Separator className="w-1/4 mx-auto mb-6 bg-border/60" />
         <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4 text-sm text-muted-foreground">
-          <span>© {new Date().getFullYear()} Your Name. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Milan M Antony. All rights reserved.</span>
           <span className="hidden sm:inline">|</span>
            <TermsDialog /> {/* Integrate TermsDialog */}
           <span className="hidden sm:inline">|</span>

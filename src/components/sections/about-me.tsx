@@ -28,9 +28,11 @@ const letter = {
 };
 
 const AboutMe = () => {
-  const line1 = "Hi, I'm Your Name";
-  const line2 = "A Passionate Web Developer";
-  const bio = "I specialize in creating modern, responsive, and user-friendly web applications. With a keen eye for detail and a love for clean code, I strive to build exceptional digital experiences. Let's build something amazing together!";
+  const name = "Milan M Antony";
+  const title = "Cloud Support Engineer";
+  const bio = "A BCA graduate with certifications in CCNA, Azure, and MCSE, aiming to secure a Cloud Support Engineer role. Eager to apply my knowledge in networking and cloud computing to provide efficient IT solutions.";
+  const initials = name.split(' ').map(n => n[0]).join(''); // MA
+
 
   return (
     <SectionWrapper id="about" className="relative overflow-hidden">
@@ -51,8 +53,8 @@ const AboutMe = () => {
           className="flex-shrink-0"
         >
           <Avatar className="w-32 h-32 md:w-48 md:h-48 border-4 border-accent/50 shadow-lg">
-            <AvatarImage src="https://picsum.photos/200/200" alt="Your Name" data-ai-hint="professional portrait" />
-            <AvatarFallback className="text-4xl md:text-6xl bg-primary text-primary-foreground">YN</AvatarFallback>
+            <AvatarImage src="https://picsum.photos/200/200" alt={name} data-ai-hint="professional portrait" />
+            <AvatarFallback className="text-4xl md:text-6xl bg-primary text-primary-foreground">{initials}</AvatarFallback>
           </Avatar>
         </motion.div>
         <div className="flex-grow text-center md:text-left">
@@ -63,7 +65,7 @@ const AboutMe = () => {
             whileInView="visible" // Animate when in view
             viewport={{ once: true }} // Only animate once
           >
-            {line1.split("").map((char, index) => (
+            {`Hi, I'm ${name}`.split("").map((char, index) => (
               <motion.span key={char + "-" + index} variants={letter}>
                 {char}
               </motion.span>
@@ -77,7 +79,7 @@ const AboutMe = () => {
              viewport={{ once: true }} // Only animate once
              transition={{ delay: 0.5, staggerChildren: 0.04 }} // Stagger slightly later
            >
-             {line2.split("").map((char, index) => (
+             {title.split("").map((char, index) => (
                <motion.span key={char + "-" + index} variants={letter}>
                  {char}
                </motion.span>
@@ -105,6 +107,7 @@ const AboutMe = () => {
                 <Mail className="mr-2 h-5 w-5" /> Get In Touch
               </Link>
             </Button>
+            {/* Placeholder link for CV download */}
             <Button asChild variant="outline" size="lg" className="border-accent text-accent hover:bg-accent/10 hover:text-accent font-semibold shadow-sm transition-transform hover:scale-105" data-cursor-pointer>
               <Link href="/resume.pdf" download target="_blank" rel="noopener noreferrer">
                  <Download className="mr-2 h-5 w-5" /> Download CV
