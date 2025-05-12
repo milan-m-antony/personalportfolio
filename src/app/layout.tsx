@@ -1,5 +1,5 @@
 import type {Metadata} from 'next';
-import {GeistSans as Geist} from 'next/font/google';
+import { Inter } from 'next/font/google'; // Changed from GeistSans
 import './globals.css';
 import {ThemeProvider} from '@/components/theme-provider';
 import {Toaster} from '@/components/ui/toaster';
@@ -7,8 +7,9 @@ import Header from '@/components/layout/header';
 import CustomCursor from '@/components/custom-cursor';
 import { cn } from '@/lib/utils';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+// Initialize Inter font
+const inter = Inter({
+  variable: '--font-inter', // Updated variable name
   subsets: ['latin'],
 });
 
@@ -27,7 +28,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          geistSans.variable,
+          inter.variable, // Use the updated font variable
           "antialiased min-h-screen flex flex-col"
         )}
       >

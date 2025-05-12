@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import SectionWrapper from '@/components/section-wrapper';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { BrainCircuit, Code, Database, Server, Palette } from 'lucide-react'; // Example icons
+import { BrainCircuit, Code, Database, Server, Palette, Github } from 'lucide-react'; // Import Github icon
 import React from 'react';
 
 const skillsData = [
@@ -18,7 +18,7 @@ const skillsData = [
   { name: "Python & Flask/Django", level: 70, category: "Backend", icon: Server },
   { name: "SQL (PostgreSQL)", level: 70, category: "Databases", icon: Database },
   { name: "MongoDB", level: 65, category: "Databases", icon: Database },
-  { name: "Git & GitHub", level: 90, category: "Tools", icon: Github }, // Assuming Github is imported elsewhere or use a generic tool icon
+  { name: "Git & GitHub", level: 90, category: "Tools", icon: Github }, // Use the imported Github icon
   { name: "Docker", level: 60, category: "Tools", icon: Server }, // Placeholder icon
   { name: "Figma", level: 70, category: "Design", icon: Palette},
 ];
