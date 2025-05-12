@@ -162,8 +162,8 @@ const Projects = () => {
         </CarouselContent>
         {projectsData.length > 1 && ( // Only show controls if more than 1 item
              <>
-                <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10 hidden sm:flex glassmorphism hover:bg-primary/80 text-primary-foreground" />
-                <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10 hidden sm:flex glassmorphism hover:bg-primary/80 text-primary-foreground" />
+                <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10 hidden sm:flex bg-[#33c4a9] text-white hover:bg-[#217ca6]" />
+                <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10 hidden sm:flex bg-[#33c4a9] text-white hover:bg-[#217ca6]" />
              </>
         )}
       </Carousel>

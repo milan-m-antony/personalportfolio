@@ -39,14 +39,14 @@ const FloatingActionButton = () => {
             asChild
             size="icon"
             className={cn(
-              "rounded-full w-14 h-14 shadow-lg glassmorphism bg-primary/80 hover:bg-primary",
-              "dark:bg-primary/60 dark:hover:bg-primary/80"
-              )}
+              "rounded-full w-14 h-14 shadow-lg bg-green-600 hover:bg-[#33c4a9]", // removed glassmorphism if it causes issues
+              "bg-green-600 dark:hover:bg-[#33c4a9]"
+            )}
             aria-label="Contact Me"
             data-cursor-pointer // Add attribute for custom cursor interaction
           >
             <Link href="#contact">
-              <MessageSquare className="w-6 h-6 text-primary-foreground" />
+              <MessageSquare className="w-6 h-6 text-white" />
             </Link>
           </Button>
         </motion.div>

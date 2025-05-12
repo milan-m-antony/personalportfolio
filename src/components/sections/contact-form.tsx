@@ -26,6 +26,9 @@ import { motion } from "framer-motion";
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
+  number: z
+    .string()
+    .regex(/^\d{9,}$/, { message: "Phone number must be at least 10 digits and contain only numbers." }), // Only digits, min 7
   subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
   // Add honeypot field for Netlify spam detection
@@ -45,6 +48,7 @@ const ContactForm = () => {
     defaultValues: {
       name: "",
       email: "",
+      number: "", // Added default value
       subject: "",
       message: "",
       'bot-field': '', // Initialize honeypot field
@@ -149,6 +153,27 @@ const ContactForm = () => {
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input type="email" placeholder="your.email@example.com" {...field} className="bg-background/70 dark:bg-background/30" data-cursor-pointer />
+                            </FormControl>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                        />
+                        <FormField
+                        control={form.control}
+                        name="number"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Phone Number</FormLabel>
+                            <FormControl>
+                                <Input
+                                  type="tel"
+                                  inputMode="numeric"
+                                  pattern="[0-9]*"
+                                  placeholder="Your Phone Number"
+                                  {...field}
+                                  className="bg-background/70 dark:bg-background/30"
+                                  data-cursor-pointer
+                                />
                             </FormControl>
                             <FormMessage />
                             </FormItem>
