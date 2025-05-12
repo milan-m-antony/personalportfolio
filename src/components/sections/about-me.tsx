@@ -35,7 +35,7 @@ const AboutMe = () => {
 
 
   return (
-    <SectionWrapper id="about" className="relative overflow-hidden">
+    <SectionWrapper id="about" className="relative overflow-hidden pt-24 md:pt-32"> {/* Increased top padding */}
        {/* Background decorative element */}
        <div className="absolute top-0 left-1/4 w-72 h-72 bg-accent/10 dark:bg-accent/5 rounded-full filter blur-3xl opacity-50 -z-10 animate-pulse"></div>
        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-primary/10 dark:bg-primary/5 rounded-full filter blur-3xl opacity-50 -z-10 animate-pulse animation-delay-4000"></div>
@@ -59,7 +59,7 @@ const AboutMe = () => {
         </motion.div>
         <div className="flex-grow text-center md:text-left">
           <motion.h1
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-primary dark:text-foreground" // Changed dark:text-primary-foreground to dark:text-foreground
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-primary dark:text-primary-foreground"
             variants={sentence}
             initial="hidden"
             whileInView="visible" // Animate when in view

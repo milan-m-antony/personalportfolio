@@ -49,19 +49,11 @@ const categories = [
 ];
 
 const Skills = () => {
-  const sectionRef = React.useRef(null);
-
-  // Note: Framer Motion's whileInView handles the animation triggering,
-  // but we keep this structure if we need manual control or more complex state updates.
-  React.useEffect(() => {
-    // Initial setup if needed, though whileInView handles the start.
-  }, []);
-
 
   return (
-    <SectionWrapper id="skills" title="Skills & Expertise" ref={sectionRef}>
+    <SectionWrapper id="skills" title="Skills & Expertise">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {categories.map((category) => {
+        {categories.map((category, catIndex) => {
            const categorySkills = skillsData.filter((skill) => skill.category === category.name);
            if (categorySkills.length === 0) return null; // Don't render empty categories
 
@@ -70,17 +62,18 @@ const Skills = () => {
                 key={category.name}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5 }}
+                viewport={{ once: true, amount: 0.2 }} // Adjust amount slightly
+                transition={{ duration: 0.5, delay: catIndex * 0.1 }} // Stagger category cards
               >
                 <Card className={cn("h-full overflow-hidden glassmorphism")}>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-lg font-semibold text-primary dark:text-foreground">{category.name}</CardTitle> {/* Updated dark mode text color */}
+                    <CardTitle className="text-lg font-semibold text-primary dark:text-foreground">{category.name}</CardTitle>
                     <category.icon className="h-6 w-6 text-accent" />
                   </CardHeader>
                   <CardContent className="space-y-4 pt-4">
-                    {categorySkills.map((skill, index) => (
-                        <SkillItem key={skill.name} skill={skill} index={index} />
+                    {categorySkills.map((skill, skillIndex) => (
+                        // Pass category index to SkillItem for combined staggering effect
+                        <SkillItem key={skill.name} skill={skill} index={skillIndex} categoryIndex={catIndex} />
                       ))}
                   </CardContent>
                 </Card>
@@ -96,9 +89,10 @@ const Skills = () => {
 interface SkillItemProps {
     skill: typeof skillsData[0];
     index: number;
+    categoryIndex: number; // Add category index for overall stagger
 }
 
-const SkillItem: React.FC<SkillItemProps> = ({ skill, index }) => {
+const SkillItem: React.FC<SkillItemProps> = ({ skill, index, categoryIndex }) => {
     const [animatedLevel, setAnimatedLevel] = React.useState(0);
     const progressRef = React.useRef<HTMLDivElement>(null); // Ref for the progress bar container
 
@@ -111,7 +105,8 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, index }) => {
           whileInView={{ opacity: 1, x: 0 }}
           // Use viewport settings from parent or define specific ones
           viewport={{ once: true, amount: 0.8 }} // Trigger when 80% visible
-          transition={{ duration: 0.5, delay: index * 0.05 + 0.2 }} // Faster stagger
+          // Combine category and skill index for a smoother overall stagger
+          transition={{ duration: 0.5, delay: categoryIndex * 0.1 + index * 0.05 + 0.1 }}
            onViewportEnter={() => {
               // Animate the progress bar value when the item enters the viewport
               const controls = animate(0, skill.level, { // Use imported animate function
