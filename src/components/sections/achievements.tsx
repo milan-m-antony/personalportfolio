@@ -86,7 +86,7 @@ const Achievements = () => {
                                </div>
                            </CardHeader>
                            <CardContent className="p-6 flex flex-col flex-grow items-center">
-                               <CardTitle className="text-lg font-semibold mb-2 text-primary dark:text-primary-foreground">{achievement.title}</CardTitle>
+                               <CardTitle className="text-lg font-semibold mb-2 text-primary dark:text-foreground">{achievement.title}</CardTitle> {/* Updated dark mode text color */}
                                <CardDescription className="text-sm text-foreground/80 dark:text-foreground/70 flex-grow">
                                    {achievement.description}
                                </CardDescription>

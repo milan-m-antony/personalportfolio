@@ -123,7 +123,7 @@ const Certifications = () => {
                  )}
               </CardHeader>
               <CardContent className="p-4 flex flex-col flex-grow"> {/* Ensure content grows */}
-                <CardTitle className="text-md font-semibold mb-1 text-primary dark:text-primary-foreground leading-tight">{cert.title}</CardTitle>
+                <CardTitle className="text-md font-semibold mb-1 text-primary dark:text-foreground leading-tight">{cert.title}</CardTitle> {/* Updated dark mode text color */}
                 <CardDescription className="text-xs text-accent mb-2 flex items-center">
                    <Award className="w-3 h-3 mr-1" /> {cert.issuer}
                 </CardDescription>

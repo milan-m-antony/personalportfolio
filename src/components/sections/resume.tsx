@@ -44,19 +44,20 @@ const resumeData = {
       role: "Network Support Engineer",
       years: "Currently Training", // Assuming this based on diploma dates
       responsibilities: [
-        "Gaining hands-on experience in network support and troubleshooting.", // Placeholder responsibility
-        "Learning about network configuration and maintenance.", // Placeholder responsibility
+        "Gaining hands-on experience in network support and troubleshooting.",
+        "Learning about network configuration and maintenance.",
+        "Assisting senior engineers with client network issues.",
       ],
     },
     // Add more experience if available
   ],
    keySkills: [
-    { name: "Networking", skills: "Routing, DHCP, NAT, VLAN, VPN, ACL, VTP, SNMP" },
-    { name: "Cloud (Azure)", skills: "Virtual Machines, Storage Accounts, Entra ID (formerly Azure AD)" },
-    { name: "Windows Server/Tools", skills: "ADDS, IIS, DHCP, FTP, RRAS, NAT, Hyper-V, Server Backup" },
-    { name: "Windows Client", skills: "OS Installation, KMSPico Activation, BitLocker, Defender" },
-    { name: "Certifications", skills: "CCNA, MCSE, Azure Admin (In Progress/Dec 2024)" },
-    { name: "Web Basics", skills: "HTML, CSS, JavaScript (from Bootcamp)" },
+    { name: "Networking", skills: "Routing, DHCP, NAT, VLAN, VPN, ACL, VTP, SNMP, Network Troubleshooting, Configuration" },
+    { name: "Cloud (Azure)", skills: "Virtual Machines, Storage Accounts, Entra ID (formerly Azure AD), Resource Management" },
+    { name: "Windows Server/Tools", skills: "ADDS, IIS, DHCP, FTP, RRAS, NAT, Hyper-V, Server Backup, Troubleshooting" },
+    { name: "Windows Client", skills: "OS Installation & Configuration, KMSPico Activation, BitLocker, Defender Security" },
+    // { name: "Certifications", skills: "CCNA, MCSE, Azure Admin (In Progress/Dec 2024)" }, // Handled in Certifications section
+    { name: "Web Basics", skills: "HTML, CSS, JavaScript (Fundamental understanding from Bootcamp)" },
   ],
    languages: [ // Added Languages Section
        { name: "English", proficiency: "Professional Working Proficiency" },
@@ -89,7 +90,7 @@ const Resume = () => {
         <Card className={cn("w-full max-w-4xl mx-auto overflow-hidden glassmorphism")}>
           <CardHeader className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 pb-4"> {/* Adjusted padding */}
             <div>
-                <CardTitle className="text-2xl font-bold text-primary dark:text-primary-foreground">{resumeData.name}</CardTitle>
+                <CardTitle className="text-2xl font-bold text-primary dark:text-foreground">{resumeData.name}</CardTitle> {/* Updated dark mode text color */}
                 <CardDescription className="text-accent">{resumeData.title}</CardDescription>
             </div>
              {/* Placeholder link for CV download */}
@@ -101,17 +102,17 @@ const Resume = () => {
           </CardHeader>
           <CardContent className="p-6 pt-4"> {/* Adjusted padding */}
             <Tabs defaultValue="experience" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8 bg-muted/50 dark:bg-muted/20 p-1 rounded-lg gap-1"> {/* Increased mb and added gap */}
-                <TabsTrigger value="experience" className="data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><Briefcase className="inline-block w-4 h-4 mr-1.5" />Experience</TabsTrigger> {/* Increased mr */}
-                <TabsTrigger value="education" className="data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><GraduationCap className="inline-block w-4 h-4 mr-1.5" />Education</TabsTrigger> {/* Increased mr */}
-                 <TabsTrigger value="skills" className="data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><Star className="inline-block w-4 h-4 mr-1.5" />Key Skills</TabsTrigger> {/* Increased mr */}
-                 <TabsTrigger value="languages" className="data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><Languages className="inline-block w-4 h-4 mr-1.5" />Languages</TabsTrigger> {/* Increased mr */}
+              <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-10 bg-muted/50 dark:bg-muted/20 p-1.5 rounded-lg gap-1"> {/* Increased mb and gap, adjusted p */}
+                <TabsTrigger value="experience" className="py-2 data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><Briefcase className="inline-block w-4 h-4 mr-2" />Experience</TabsTrigger> {/* Adjusted padding and mr */}
+                <TabsTrigger value="education" className="py-2 data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><GraduationCap className="inline-block w-4 h-4 mr-2" />Education</TabsTrigger> {/* Adjusted padding and mr */}
+                <TabsTrigger value="skills" className="py-2 data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><Star className="inline-block w-4 h-4 mr-2" />Key Skills</TabsTrigger> {/* Adjusted padding and mr */}
+                <TabsTrigger value="languages" className="py-2 data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-accent"><Languages className="inline-block w-4 h-4 mr-2" />Languages</TabsTrigger> {/* Adjusted padding and mr */}
               </TabsList>
 
               {/* Experience Tab */}
               <TabsContent value="experience">
                 {resumeData.experience.length > 0 ? (
-                    <div className="space-y-8"> {/* Increased spacing between items */}
+                    <div className="space-y-10"> {/* Increased spacing between items */}
                     {resumeData.experience.map((exp, index) => (
                         <motion.div
                         key={index}
@@ -120,12 +121,15 @@ const Resume = () => {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.5 }}
                         custom={index}
-                        className="border-l-2 border-accent pl-6 space-y-1" // Increased padding left, added space-y for inner spacing
+                        className="border-l-4 border-accent pl-6 space-y-1.5 relative group" // Increased padding left, added space-y, thicker border, relative for dot
                         >
-                        <h3 className="text-lg font-semibold text-foreground leading-snug">{exp.role}</h3>
+                        {/* Dot on the timeline */}
+                        <div className="absolute -left-[9px] top-1 w-4 h-4 bg-background border-2 border-accent rounded-full transition-transform duration-300 group-hover:scale-110"></div>
+
+                        <h3 className="text-lg font-semibold text-foreground leading-snug pt-0.5">{exp.role}</h3> {/* Added padding top */}
                         <p className="text-sm font-medium text-accent">{exp.company} | {exp.years}</p>
                         {exp.responsibilities && exp.responsibilities.length > 0 && (
-                            <ul className="list-disc list-outside pl-5 pt-1 space-y-1.5 text-sm text-foreground/80 dark:text-foreground/70"> {/* Increased space-y */}
+                            <ul className="list-disc list-outside pl-5 pt-2 space-y-2 text-sm text-foreground/80 dark:text-foreground/70"> {/* Increased space-y and pt */}
                                 {exp.responsibilities.map((resp, i) => (
                                 <li key={i}>{resp}</li>
                                 ))}
@@ -141,7 +145,7 @@ const Resume = () => {
 
               {/* Education Tab */}
               <TabsContent value="education">
-                 <div className="space-y-8"> {/* Increased spacing between items */}
+                 <div className="space-y-10"> {/* Increased spacing between items */}
                   {resumeData.education.map((edu, index) => (
                      <motion.div
                         key={index}
@@ -150,9 +154,12 @@ const Resume = () => {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.5 }}
                         custom={index}
-                        className="border-l-2 border-accent pl-6 space-y-1" // Increased padding left, added space-y for inner spacing
+                        className="border-l-4 border-accent pl-6 space-y-1.5 relative group" // Increased padding left, added space-y, thicker border, relative for dot
                       >
-                      <h3 className="text-lg font-semibold text-foreground leading-snug">{edu.degree}</h3>
+                       {/* Dot on the timeline */}
+                       <div className="absolute -left-[9px] top-1 w-4 h-4 bg-background border-2 border-accent rounded-full transition-transform duration-300 group-hover:scale-110"></div>
+
+                      <h3 className="text-lg font-semibold text-foreground leading-snug pt-0.5">{edu.degree}</h3> {/* Added padding top */}
                       <p className="text-sm font-medium text-accent">{edu.institution} | {edu.years}</p>
                        {edu.details && <p className="mt-1 text-sm text-foreground/80 dark:text-foreground/70">{edu.details}</p>}
                     </motion.div>
@@ -162,7 +169,7 @@ const Resume = () => {
 
                {/* Skills Tab */}
                 <TabsContent value="skills">
-                   <div className="space-y-6"> {/* Increased spacing */}
+                   <div className="space-y-8"> {/* Increased spacing */}
                     {resumeData.keySkills.map((skillCat, index) => (
                       <motion.div
                         key={skillCat.name}
@@ -171,8 +178,9 @@ const Resume = () => {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.5 }}
                         custom={index}
+                        className="border-b border-border/40 pb-4 last:border-b-0" // Added border bottom and padding
                       >
-                         <h4 className="text-md font-semibold text-accent mb-2">{skillCat.name}</h4> {/* Increased mb */}
+                         <h4 className="text-md font-semibold text-accent mb-2.5">{skillCat.name}</h4> {/* Increased mb */}
                          <p className="text-sm text-foreground/80 dark:text-foreground/70 leading-relaxed">{skillCat.skills}</p> {/* Added leading-relaxed */}
                       </motion.div>
                     ))}
@@ -181,7 +189,7 @@ const Resume = () => {
 
                  {/* Languages Tab */}
                 <TabsContent value="languages">
-                   <div className="space-y-5"> {/* Increased spacing */}
+                   <div className="space-y-6"> {/* Increased spacing */}
                     {resumeData.languages.map((lang, index) => (
                       <motion.div
                         key={lang.name}
@@ -190,9 +198,9 @@ const Resume = () => {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.5 }}
                         custom={index}
-                        className="flex justify-between items-center border-b border-border/50 pb-3" // Added border and padding bottom
+                        className="flex justify-between items-center border-b border-border/50 pb-4" // Added padding bottom
                       >
-                        <span className="text-md font-medium text-foreground">{lang.name}</span> {/* Changed font-semibold to medium */}
+                        <span className="text-md font-medium text-foreground">{lang.name}</span>
                         <span className="text-sm text-muted-foreground">{lang.proficiency}</span>
                       </motion.div>
                     ))}

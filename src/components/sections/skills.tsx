@@ -14,24 +14,24 @@ const skillsData = [
   { name: "Routing & Switching", level: 85, category: "Networking", icon: Server },
   { name: "DHCP, NAT, VLAN, VPN", level: 80, category: "Networking", icon: Settings },
   { name: "ACL, VTP, SNMP", level: 75, category: "Networking", icon: ShieldCheck },
-  { name: "Network Fundamentals", level: 90, category: "Networking", icon: Server },
+  { name: "Network Troubleshooting", level: 80, category: "Networking", icon: Settings }, // Added
 
   // Cloud (High focus due to Azure cert)
-  { name: "Microsoft Azure", level: 85, category: "Cloud", icon: Cloud },
+  { name: "Microsoft Azure Administration", level: 85, category: "Cloud", icon: Cloud }, // Updated title
   { name: "Azure Virtual Machines", level: 80, category: "Cloud", icon: Cloud },
   { name: "Azure Storage Accounts", level: 75, category: "Cloud", icon: Database },
   { name: "Azure Entra ID (AD)", level: 75, category: "Cloud", icon: Cloud },
 
   // Windows Server/Tools (Medium focus due to MCSE)
   { name: "Active Directory (ADDS)", level: 70, category: "Server & Tools", icon: Server },
-  { name: "IIS, DHCP Server", level: 65, category: "Server & Tools", icon: Server },
+  { name: "IIS, DHCP Server, FTP, RRAS", level: 65, category: "Server & Tools", icon: Server }, // Consolidated
   { name: "Hyper-V", level: 60, category: "Server & Tools", icon: Server },
-  { name: "Server Backup", level: 60, category: "Server & Tools", icon: HardDrive },
+  { name: "Server Backup & Recovery", level: 60, category: "Server & Tools", icon: HardDrive }, // Updated
 
   // Windows Client (Supporting skill)
-  { name: "OS Installation", level: 80, category: "Client OS", icon: HardDrive },
+  { name: "OS Installation & Config", level: 80, category: "Client OS", icon: HardDrive }, // Updated
   { name: "BitLocker, Defender", level: 70, category: "Client OS", icon: ShieldCheck },
-  { name: "KMSPico (Activation)", level: 60, category: "Client OS", icon: Settings }, // Note: KMSPico is often associated with unlicensed software. List carefully.
+  { name: "KMSPico (Activation Tool)", level: 60, category: "Client OS", icon: Settings }, // Clarified
 
   // Web Development (From Bootcamp)
   { name: "HTML & CSS", level: 65, category: "Web Development", icon: Code },
@@ -75,7 +75,7 @@ const Skills = () => {
               >
                 <Card className={cn("h-full overflow-hidden glassmorphism")}>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-lg font-semibold text-primary dark:text-primary-foreground">{category.name}</CardTitle>
+                    <CardTitle className="text-lg font-semibold text-primary dark:text-foreground">{category.name}</CardTitle> {/* Updated dark mode text color */}
                     <category.icon className="h-6 w-6 text-accent" />
                   </CardHeader>
                   <CardContent className="space-y-4 pt-4">

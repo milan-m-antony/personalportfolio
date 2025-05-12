@@ -98,7 +98,7 @@ const ContactForm = () => {
        >
         <Card className={cn("max-w-2xl mx-auto glassmorphism")}>
             <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-semibold text-primary dark:text-primary-foreground">Contact Me</CardTitle>
+            <CardTitle className="text-2xl font-semibold text-primary dark:text-foreground">Contact Me</CardTitle> {/* Updated dark mode text color */}
             <CardDescription className="text-foreground/80 dark:text-foreground/70">
                 Have a question or want to work together? Fill out the form below.
             </CardDescription>

@@ -59,7 +59,7 @@ const AboutMe = () => {
         </motion.div>
         <div className="flex-grow text-center md:text-left">
           <motion.h1
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-primary dark:text-primary-foreground"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-primary dark:text-foreground" // Changed dark:text-primary-foreground to dark:text-foreground
             variants={sentence}
             initial="hidden"
             whileInView="visible" // Animate when in view

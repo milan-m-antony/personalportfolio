@@ -156,7 +156,7 @@ const Timeline = () => {
                     isLeft ? "md:mr-[calc(50%+2rem)]" : "md:ml-[calc(50%+2rem)]" // Adjust margin for alignment
                    )} data-cursor-pointer>
                     <p className="text-xs font-semibold text-accent mb-1">{item.date}</p>
-                    <h3 className="text-md font-semibold text-primary dark:text-primary-foreground mb-1">{item.title}</h3>
+                    <h3 className="text-md font-semibold text-primary dark:text-foreground mb-1">{item.title}</h3> {/* Updated dark mode text color */}
                     <p className="text-sm text-foreground/80 dark:text-foreground/70">{item.description}</p>
                   </div>
                 </motion.div>

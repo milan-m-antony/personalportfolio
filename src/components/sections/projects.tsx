@@ -24,34 +24,34 @@ import { motion } from "framer-motion";
 const projectsData = [
   {
     title: "Online Diagnostic Lab Management System",
-    description: "A web application for managing diagnostic lab operations. (Further details pending)",
+    description: "A web application for managing diagnostic lab operations, improving efficiency in appointment scheduling and report delivery.",
     image: "https://picsum.photos/600/400?random=1",
-    tags: ["Web App", "Management System"], // Placeholder tags
+    tags: ["Web App", "Management", "PHP", "MySQL"],
     liveUrl: "#",
     githubUrl: "#",
     aiHint: "lab system online",
   },
   {
     title: "Cloud Resource Management",
-    description: "A project focused on managing cloud resources efficiently. (Further details pending)",
+    description: "Developed scripts and strategies for optimizing resource allocation and cost management within a cloud environment.",
     image: "https://picsum.photos/600/400?random=2",
-    tags: ["Cloud", "Management", "Azure"], // Placeholder tags
+    tags: ["Cloud", "Management", "Azure", "Scripting"],
     liveUrl: "#",
     githubUrl: "#",
     aiHint: "cloud dashboard manage",
   },
   {
     title: "Teacher Duty Hour Allocation System",
-    description: "System designed to allocate duty hours for teachers. (Further details pending)",
+    description: "A system designed to automate and streamline the process of assigning duty hours for teachers, ensuring fair distribution.",
     image: "https://picsum.photos/600/400?random=3",
-    tags: ["Allocation System", "Web App"], // Placeholder tags
+    tags: ["Allocation System", "Web App", "Automation"],
     liveUrl: "#",
     githubUrl: "#",
     aiHint: "schedule system teacher",
   },
    {
     title: "Personal Portfolio",
-    description: "This website, built to showcase my skills and projects.",
+    description: "This website, built using modern web technologies to showcase my skills, projects, and professional journey.",
     image: "https://picsum.photos/600/400?random=4",
     tags: ["Next.js", "React", "TailwindCSS", "TypeScript", "Framer Motion"],
     liveUrl: "#", // Current site URL ideally
@@ -132,7 +132,7 @@ const Projects = () => {
                       {/* <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div> */}
                     </CardHeader>
                     <CardContent className="p-6 flex-grow flex flex-col">
-                      <CardTitle className="text-xl font-semibold mb-2 text-primary dark:text-primary-foreground">{project.title}</CardTitle>
+                      <CardTitle className="text-xl font-semibold mb-2 text-primary dark:text-foreground">{project.title}</CardTitle> {/* Updated dark mode text color */}
                       <CardDescription className="text-foreground/80 dark:text-foreground/70 mb-4 flex-grow">{project.description}</CardDescription>
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.tags.map((tag) => (
