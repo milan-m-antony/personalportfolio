@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import { motion, animate } from 'framer-motion'; // Import animate directly
 import { Progress } from "@/components/ui/progress";
 import SectionWrapper from '@/components/section-wrapper';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { BrainCircuit, Code, Database, Server, Palette, Github } from 'lucide-react'; // Import Github icon
+import { BrainCircuit, Code, Database, Server, Palette, Github } from 'lucide-react';
 import React from 'react';
 
 const skillsData = [
@@ -18,7 +18,7 @@ const skillsData = [
   { name: "Python & Flask/Django", level: 70, category: "Backend", icon: Server },
   { name: "SQL (PostgreSQL)", level: 70, category: "Databases", icon: Database },
   { name: "MongoDB", level: 65, category: "Databases", icon: Database },
-  { name: "Git & GitHub", level: 90, category: "Tools", icon: Github }, // Use the imported Github icon
+  { name: "Git & GitHub", level: 90, category: "Tools", icon: Github },
   { name: "Docker", level: 60, category: "Tools", icon: Server }, // Placeholder icon
   { name: "Figma", level: 70, category: "Design", icon: Palette},
 ];
@@ -32,7 +32,6 @@ const categories = [
 ];
 
 const Skills = () => {
-  const [animatedLevels, setAnimatedLevels] = React.useState<{ [key: string]: number }>({});
   const sectionRef = React.useRef(null);
 
   // Note: Framer Motion's whileInView handles the animation triggering,
@@ -93,7 +92,7 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, index }) => {
           transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }} // Stagger within card + card delay
            onViewportEnter={() => {
               // Animate the progress bar value when the item enters the viewport
-              const controls = motion.animate(0, skill.level, {
+              const controls = animate(0, skill.level, { // Use imported animate function
                   duration: 1,
                   delay: index * 0.1 + 0.4, // Delay slightly more for the bar animation
                   ease: "easeOut",
